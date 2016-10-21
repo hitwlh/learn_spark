@@ -1,0 +1,60 @@
+
+val input = sc.parallelize(List(("coffee",1),("coffee",2),("panda",3),("coffee",9)),2)
+
+val  result = input.combineByKey((v) => (v,0),(acc:(Int,Int),v)=>(acc._1+v,acc._2+1),(acc1:(Int,Int),acc2:(Int,Int))=>(acc1._1+acc2._1,acc1._2+acc2._2))
+
+
+
+var rdd2 = input.mapPartitionsWithIndex{
+        (x,iter) => {
+          var result = List[(String,Int)]()
+            while(iter.hasNext){
+              result = result :+ iter.next()
+            }
+            result.iterator
+        }
+  	}
+
+查看各个分区的内容
+var rdd2 = nums.mapPartitionsWithIndex{
+        (x,iter) => {
+          var result = List[(String,Int)](("%",x))
+            while(iter.hasNext){
+              result = result :+ iter.next()
+            }
+            result.iterator
+        }}
+
+
+
+
+var rdd2 = nums.mapPartitionsWithIndex{
+        (x,iter) => {
+          var result = List[Int](123)
+            while(iter.hasNext){
+              result = result :+ iter.next()
+            }
+            result.iterator
+        }}
+
+
+
+
+
+
+var rdd2 = input.mapPartitions{
+        x => {
+          var result = List[(String,Int)](("%",1))
+            while(x.hasNext){
+              result = result :+ x.next()
+            }       
+            result.iterator
+        }
+  	}
+
+val f: ((String,(Int,Int))) =>(String,Int) = {case (a,b) => (a,b._1+b._2)}
+
+
+def f( val (a,b):(String,(Int,Int))) :(String,(Int,Int))={
+  (a,b) => (a,b._1/b._2)
+}

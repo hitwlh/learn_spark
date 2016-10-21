@@ -1,0 +1,13 @@
+val result = input.mapValues({
+  y =>
+  val num = y.split(" ").map(x=>x.toDouble)
+  num.sum/num.size.toDouble
+  })
+
+
+
+val result = input.mapValues(
+  y =>
+  val num = y.split(" ").map(x=>x.toDouble)
+  num.sum/num.size.toDouble
+  ) 
